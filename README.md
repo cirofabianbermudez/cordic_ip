@@ -1,2 +1,6 @@
 # cordic_ip
-CORDIC ip FPGA verilog/systemverilog
+
+
+## Introduction
+
+CORDIC (COordinate Rotation DIgital Computer)
