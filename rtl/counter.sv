@@ -11,17 +11,17 @@
 ///////////////////////////////////////////////////////////////////////////////////
 
 module counter #(
-    parameter int Width = 16
+    parameter int Width = 4
 ) (
     input  wire             clk_i,
     input  wire             rst_i,
     input  wire             ena_i,
     input  wire [Width-1:0] max_i,
     output wire [Width-1:0] cnt_o,
-    output wire [Width-1:0] tick_o
+    output wire             tick_o
 );
 
-  reg [10:0] counter_q, counter_d;
+  reg [Width-1:0] counter_q, counter_d;
   reg counter_done;
 
   always @(posedge clk_i, posedge rst_i) begin
