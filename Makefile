@@ -1,5 +1,5 @@
 
-SRCS = $(wildcard *.sv)
+SRCS = $(wildcard rtl/*.sv)
 
 .PHONY: format prevew lint clean
 
@@ -11,7 +11,7 @@ format:
 preview:
 	rm -rf preview
 	mkdir -p preview
-	$(foreach file, $(SRCS), verible-verilog-format $(file) > preview/format_\$(notdir \$(file)); )
+	$(foreach file, $(SRCS), verible-verilog-format $(file) > preview/format_$(notdir $(file)); )
 
 lint:
 	verible-verilog-lint $(SRCS) || true
