@@ -89,7 +89,7 @@ int main(int argc, char *argv[]){
 	printf(" # y0 real: %2.10f\n",getNumber(yi) );
 	printf(" # z0 real: %2.10f\n",getNumber(zi) );
 	
-	for(i = 0; i<12; i++){
+	for(i = 0; i<15; i++){
 		gamma = pow( 2.0, -(double)i );
 		invtan = factor*atan( gamma );
 		di = d_func(zi);
