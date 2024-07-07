@@ -3,7 +3,7 @@
 
 ## Introduction
 
-The CORDIC (COordinate Rotation DIgital Computer) was developed by Jack Volder in 1959 as an iterative algorithm algorithm to convert between polar and cartesian coordinates using shift, add and subtract operations only:
+The CORDIC (COordinate Rotation DIgital Computer) was developed by Jack Volder in 1959 as an iterative algorithm to convert between polar and cartesian coordinates using shift, add and subtract operations only:
 
 - Implemented with a Shift-Add/Subtract type algorithm
 - Can be used to compute trigonometric, hyperbolic, linear and logarithmic functions
@@ -14,7 +14,7 @@ The CORDIC (COordinate Rotation DIgital Computer) was developed by Jack Volder i
 
 ## Circular rotation mode
 
-In the circular rotation mode a CORDIC fuction could compute the cartisian coordinates of the target vector $\mathbf{v_{n}}$ by rotating the input vector $\mathbf{v_{0}}$ by an arbitrary angle $\phi$. So how do we calculate $x_{n}$ and $y_{n}$ based on the input vector and angle?
+In the circular rotation mode a CORDIC function could compute the cartisian coordinates of the target vector $\mathbf{v_{n}}$ by rotating the input vector $\mathbf{v_{0}}$ by an arbitrary angle $\phi$. So how do we calculate $x_{n}$ and $y_{n}$ based on the input vector and angle?
     
 We start from the idea that we have a vector $\mathbf{v_{0}}$, a rotation matrix $\mathbf{M}$ and that by multiplying them we generate a vector $\mathbf{v_{n}}$.
 
@@ -164,8 +164,9 @@ We start at iteration $0$ with an angle of $Z_{0} = 20$.
 If we add all the angles with the corresponding sign we get:
 
 ```math
--45.0000 + 26.5651 - 14.0362 - 7.1250 + 3.5763 + 1.7899 - 0.8952 \approx -20
+-45.0000 + 26.5651 - 14.0362 + 7.1250 + 3.5763 + 1.7899 - 0.8952 \approx -20.0000
 ```
+So if we add the initial angle and all the angles of the iterations with the corresponding sign we get zero.
 
 So summarizing the above we can generate an iterative equation if we define the following:
 
@@ -229,6 +230,83 @@ then
 ```math
 \cos \theta = \cos( \arctan(x)) = \pm \frac{1}{\sqrt{1 + x^{2}}}
 ```
+
+Removing the scale constant from the iterative equations yields a shift-add algorithm for vector rotation. The product of the $K_{i}$'s can be applied elsewhere in the system or treated as a part of a system processing gain. That product approaches $0.6073$ as the number of iterations goes to infinity. Therefore, the rotation algorithm has a gain, $A_{n}$, of approximately $1.647$. The exact gain depends on the number of iterations, and obeys the relation:
+
+```math
+A_{n} = \frac{1}{K_{n}} = \prod_{n} \sqrt{1 + 2^{-2i}}
+```
+
+The gain $A_{n}$ is used so that the magnitude of the vector is not affected.
+
+
+It also needs to be noted that the previous equations are valid for rotations angles between:
+
+```math
+-\frac{\pi}{2} \leq \phi \leq \frac{\pi}{2}
+```
+
+In order to increase the convergence range for all rotation angles $|Z_{0}| < \pi$. Volder proposed an initial iteration which rotates the input vector by $|Z_{0}| < \pi$. So that:
+
+```math
+\begin{array}{lll}
+  x'_{0} & = &  - y_{0}  d\\
+  y'_{0} & = & x_{0}  d \\
+  z'_{0} & = & z_{0} - d \frac{\pi}{2}
+\end{array} 
+
+\quad \text{where} \quad
+
+d = 
+\left\{ 
+  \begin{array}{lcl}
+    -1  & \text{ si } & Z_{0} < 0 \\
+    +1  & \text{ si } & Z_{0} \geq 0
+  \end{array}
+\right.
+```
+
+It is worth noting that there is no growth or gain due to this initial rotation.
+
+Finally, we obtain:
+
+```math
+\begin{array}{lll}
+  x_{i+1} & = & x_{i} - y_{i}  d_{i} 2 ^{-i}\\
+  y_{i+1} & = & y_{i} + x_{i}  d_{i} 2 ^{-i}\\
+  z_{i+1} & = & z_{i} - d_{i} \arctan(2^{-i})
+\end{array}
+
+\quad \text{donde} \quad
+
+d_{i} = 
+\left\{ 
+  \begin{array}{lcl}
+    -1  & \text{ si } & Z_{i} < 0 \\
+    +1  & \text{ si } & Z_{i} \geq 0
+  \end{array}
+\right.
+```
+
+Where $d_{i}$ defines the direction of for each rotation element. Notice that:
+
+```math
+d_{i} \arctan(2^{-i}) =  \arctan(d_{i} 2^{-i})
+```
+
+
+What happens to $x_{i}  d_{i} 2 ^{-i}$ when $i >$ width of $x$?, in other words, lets imagine that $x$ is 4 bits wide, after the 4 iteration the term $x_{i} d_{i} 2 ^{-i}$ goes to zero, we can think of $2 ^{-i}$ as a shift to the right, and after 4 shifts the is no more to shift, and more iterations do not improve the approximation.
+
+Therefore after $n$ iterations the CORDIC equation results in:
+
+```math
+\begin{array}{lll}
+  x_{n} & \approx & A_{n}(x_{0} \cos{Z_{0}} - y_{0}  \sin {Z_{0}} ) \\
+  y_{n} & \approx & A_{n}(y_{0} \cos{Z_{0}}  + x_{0} \sin {Z_{0}} ) \\
+  z_{n} & \approx & 0
+\end{array}
+```
+
 
 
 
