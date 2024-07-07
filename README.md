@@ -161,6 +161,76 @@ We start at iteration $0$ with an angle of $Z_{0} = 20$.
 
 </div>
 
+If we add all the angles with the corresponding sign we get:
+
+```math
+-45.0000 + 26.5651 - 14.0362 - 7.1250 + 3.5763 + 1.7899 - 0.8952 \approx -20
+```
+
+So summarizing the above we can generate an iterative equation if we define the following:
+
+```math
+\tan \phi_{i} = 
+\left\{
+\begin{array}{lcl}
+-  2 ^{-i}& \text{ si } & Z_{i} < 0 \\
++  2 ^{-i}& \text{ si } & Z_{i} \geq 0
+\end{array}
+\right. 
+```
+
+written another way:
+
+```math
+\tan \phi_{i} =   d_{i}2 ^{-i}
+\quad \text{where} \quad
+
+d_{i} = 
+\left\{ 
+  \begin{array}{lcl}
+    -1  & \text{ if } & Z_{i} < 0 \\
+    +1  & \text{ if } & Z_{i} \geq 0
+  \end{array}
+\right.
+```
+
+With $i = 0, 1, 2, \ldots ,n-1$, 
+
+Using the cosine property:
+
+```math
+\cos (\phi_{i} )=  \cos (-\phi_{i})
+```
+
+this means that cosine is independent of the direction of rotation, then we can rewrite our equation $\mathbf{x_{n}}$ y $\mathbf{y_{n}}$ as follows:
+
+```math
+\begin{array}{lll}
+  x_{i+1} & = & K_{i} (x_{i} - y_{i}  d_{i} 2 ^{-i}) \\
+  y_{i+1} & = & K_{i} (y_{i} + x_{i}  d_{i} 2 ^{-i})
+\end{array}
+```
+
+where:
+
+
+```math
+K_{i} = \cos( \arctan(2^{-i})) = \frac{1}{\sqrt{1 + 2^{-2i}}}
+```
+
+note that
+
+```math
+\sec \theta = \pm \sqrt{ 1 +\tan^{2} \theta } \quad \text{and} \quad \tan \theta = x \quad  \iff \quad \theta = \arctan x
+```
+
+then
+
+```math
+\cos \theta = \cos( \arctan(x)) = \pm \frac{1}{\sqrt{1 + x^{2}}}
+```
+
+
 
 ## References
 
