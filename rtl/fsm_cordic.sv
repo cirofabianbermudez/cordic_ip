@@ -10,27 +10,30 @@
 ///////////////////////////////////////////////////////////////////////////////////
 
 module fsm_cordic (
-    input  wire clk_i,
-    input  wire rst_i,
-    input  wire start_cordic_i,
-    input  wire cnt_tick_i,
-    output reg  sel_o,
-    output reg  ena1_o,
-    output reg  ena2_o,
-    output reg  ena_cnt_o,
-    output reg  done_tick_cordic_o
+    input  logic clk_i,
+    input  logic rst_i,
+    input  logic start_cordic_i,
+    input  logic cnt_tick_i,
+    output logic sel_o,
+    output logic ena1_o,
+    output logic ena2_o,
+    output logic ena_cnt_o,
+    output logic done_tick_cordic_o
 );
 
-  localparam [2:0] IDLE        = 3'd0,
-                   INIT_COND1  = 3'd1,
-                   INIT_COND2  = 3'd2,
-                   INC_ADDR    = 3'd3,
-                   ITER_STAGE1 = 3'd4,
-                   ITER_STAGE2 = 3'd5;
+  typedef enum {
+    IDLE,
+    INIT_COND1,
+    INIT_COND2,
+    INC_ADDR,
+    ITER_STAGE1,
+    ITER_STAGE2,
+    XXX
+  } state_type_e;
 
-  reg [3:0] state_reg, state_next;
+  state_type_e state_reg, state_next;
 
-  always @(posedge clk_i, posedge rst_i) begin
+  always_ff @(posedge clk_i, posedge rst_i) begin
     if (rst_i) begin
       state_reg <= IDLE;
     end else begin
@@ -38,7 +41,7 @@ module fsm_cordic (
     end
   end
 
-  always @(*) begin
+  always_comb begin
     state_next         = state_reg;
     done_tick_cordic_o = 1'b0;
     sel_o              = 1'b1;
@@ -53,17 +56,17 @@ module fsm_cordic (
         end
       end
       INIT_COND1: begin
-        sel_o  = 1'b0;
+        sel_o = 1'b0;
         ena1_o = 1'b1;
         state_next = INIT_COND2;
       end
       INIT_COND2: begin
-        sel_o  = 1'b0;
+        sel_o = 1'b0;
         ena2_o = 1'b1;
         state_next = INC_ADDR;
       end
       INC_ADDR: begin
-        ena_cnt_o = 1'b1;
+        ena_cnt_o  = 1'b1;
         state_next = ITER_STAGE1;
       end
       ITER_STAGE1: begin
@@ -80,7 +83,7 @@ module fsm_cordic (
         end
       end
       default: begin
-        state_next = 'x;
+        state_next = XXX;
       end
     endcase
   end

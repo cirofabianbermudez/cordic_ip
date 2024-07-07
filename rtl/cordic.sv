@@ -12,16 +12,16 @@
 module cordic #(
     parameter int Width = 16
 ) (
-    input  wire clk_i,
-    input  wire rst_i,
-    input  wire start_cordic_i,
-    input  wire [Width-1:0] x0_i,
-    input  wire [Width-1:0] y0_i,
-    input  wire [Width-1:0] z0_i,
-    output wire [Width-1:0] xn_o,
-    output wire [Width-1:0] yn_o,
-    output wire [Width-1:0] zn_o,
-    output wire done_tick_cordic_o
+    input logic clk_i,
+    input logic rst_i,
+    input logic start_cordic_i,
+    input logic [Width-1:0] x0_i,
+    input logic [Width-1:0] y0_i,
+    input logic [Width-1:0] z0_i,
+    output logic [Width-1:0] xn_o,
+    output logic [Width-1:0] yn_o,
+    output logic [Width-1:0] zn_o,
+    output logic done_tick_cordic_o
 );
 
   // Sign signal
@@ -41,7 +41,7 @@ module cordic #(
 
   // Counter signals
   wire ena_cnt;
-  localparam [3:0] max = 'd15;
+  localparam logic [3:0] MaxIter = 'd15;
   wire [3:0] addr;
   wire cnt_tick;
 
@@ -54,10 +54,8 @@ module cordic #(
   // Sum signals
   wire [Width-1:0] xn_sum, yn_sum;
 
-
   // di logic
   assign di = zn_aux[Width-1];
-
 
   ////////////////////////////////////////
   //        FSM CORDIC
@@ -84,7 +82,7 @@ module cordic #(
       .clk_i (clk_i),
       .rst_i (rst_i),
       .ena_i (ena_cnt),
-      .max_i (max),
+      .max_i (MaxIter),
       .cnt_o (addr),
       .tick_o(cnt_tick)
   );
@@ -128,7 +126,7 @@ module cordic #(
       .q_o  (rom_aux)
   );
 
-  sum_sel #(
+  adder_sel #(
       .Width(Width)
   ) sum_z (
       .x_i (zn_aux),
@@ -164,7 +162,7 @@ module cordic #(
       .amount_i(addr),
       .y_o(xn_shift)
   );
-  sum_sel #(
+  adder_sel #(
       .Width(Width)
   ) sum_x (
       .x_i (xn_aux),
@@ -212,7 +210,7 @@ module cordic #(
       .y_o(yn_shift)
   );
 
-  sum_sel #(
+  adder_sel #(
       .Width(Width)
   ) sum_y (
       .x_i (yn_aux),
