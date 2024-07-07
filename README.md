@@ -28,7 +28,7 @@ We start from the idea that we have a vector $\mathbf{v_{0}}$, a rotation matrix
 \left[ 
   \begin{array}{c}
     x_{0}\\
-    y_{0}\\
+    y_{0}
   \end{array}
 \right] 
 
@@ -38,7 +38,7 @@ We start from the idea that we have a vector $\mathbf{v_{0}}$, a rotation matrix
 \left[
   \begin{array}{cc}
     \cos \phi & -\sin \phi \\
-    \sin \phi & \cos \phi  \\
+    \sin \phi & \cos \phi
   \end{array}
 \right]
 
@@ -48,7 +48,7 @@ We start from the idea that we have a vector $\mathbf{v_{0}}$, a rotation matrix
 \left[
   \begin{array}{c}
     x_{n} \\
-    y_{n} \\
+    y_{n}
   \end{array}
 \right]
 ```
@@ -63,21 +63,21 @@ then
 \left[ 
   \begin{array}{cc}
     \cos \phi & -\sin \phi \\
-    \sin \phi & \cos \phi  \\
+    \sin \phi & \cos \phi
   \end{array}
 \right]
 
 \left[ 
   \begin{array}{c}
     x_{0} \\
-    y_{0} \\
+    y_{0}
   \end{array}
 \right] = 
 
 \left[ 
   \begin{array}{c}
     x_{n} \\
-    y_{n} \\
+    y_{n}
   \end{array}
 \right]
 ```
@@ -85,7 +85,7 @@ then
 ```math
 \begin{array}{lll}
   x_{n} & = & x_{0} \cos \phi - y_{0} \sin \phi \\
-  y_{n} & = & x_{0} \sin \phi + y_{0} \cos \phi \\
+  y_{n} & = & x_{0} \sin \phi + y_{0} \cos \phi
 \end{array}
 ```
 
