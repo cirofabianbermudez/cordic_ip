@@ -19,55 +19,67 @@ In the circular rotation mode a CORDIC fuction could compute the cartisian coord
 
 We start from the idea that we have a vector $\mathbf{v_{0}}$, a rotation matrix $\mathbf{M}$ and that by multiplying them we generate a vector $\mathbf{v_{n}}$.
 
-![Vector Diagram](images/vector_diagram.svg)
+<p align="center">
+  <img src="images/vector_diagram.svg" />
+</p>
 
 ```math
-\mathbf{v_{0}} = \left[ \begin{array}{c}
-		x_{0}\\
-		y_{0}\\
-		\end{array}
-		\right] 
-		
-		\quad \mathrm{,} \quad
-		
-		\mathbf{M} = \left[ \begin{array}{cc}
-		\cos \phi & -\sin \phi \\
-		\sin \phi & \cos \phi \\
-		\end{array}
-		\right]
-		
-		\quad \mathrm{,} \quad
-		
-		\mathbf{v_{n}} = \left[ \begin{array}{c}
-		x_{n}\\
-		y_{n}\\
-		\end{array}
-		\right]
-```
+\mathbf{v_{0}} = 
+\left[ 
+  \begin{array}{c}
+    x_{0}\\
+    y_{0}\\
+  \end{array}
+\right] 
 
+\quad \mathrm{,} \quad
+
+\mathbf{M} = 
+\left[
+  \begin{array}{cc}
+    \cos \phi & -\sin \phi \\
+    \sin \phi & \cos \phi  \\
+  \end{array}
+\right]
+
+\quad \mathrm{,} \quad
+
+\mathbf{v_{n}} = 
+\left[
+  \begin{array}{c}
+    x_{n} \\
+    y_{n} \\
+  \end{array}
+\right]
+```
 
 then 
 
 ```math
 \mathbf{v_{0}} \mathbf{M} = \mathbf{v_{n}} 
-	\quad \text{o} \quad
-	\left[ \begin{array}{cc}
-		\cos \phi & -\sin \phi \\
-		\sin \phi & \cos \phi \\
-		\end{array}
-		\right]
-		
-		\left[ \begin{array}{c}
-		x_{0}\\
-		y_{0}\\
-		\end{array}
-		\right] = 
-		
-		\left[ \begin{array}{c}
-		x_{n}\\
-		y_{n}\\
-		\end{array}
-		\right]
+
+\quad \text{o} \quad
+
+\left[ 
+  \begin{array}{cc}
+    \cos \phi & -\sin \phi \\
+    \sin \phi & \cos \phi  \\
+  \end{array}
+\right]
+
+\left[ 
+  \begin{array}{c}
+    x_{0} \\
+    y_{0} \\
+  \end{array}
+\right] = 
+
+\left[ 
+  \begin{array}{c}
+    x_{n} \\
+    y_{n} \\
+  \end{array}
+\right]
 ```
 
 ```math
@@ -82,7 +94,6 @@ then
 ```
 
 ## Rotational 
-
 
 
 ## References
