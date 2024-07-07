@@ -21,7 +21,7 @@ We start from the idea that we have a vector $\mathbf{v_{0}}$, a rotation matrix
 
 ![Vector Diagram](images/vector_diagram.svg)
 
-$$
+```math
 \mathbf{v_{0}} = \left[ \begin{array}{c}
 		x_{0}\\
 		y_{0}\\
@@ -43,11 +43,12 @@ $$
 		y_{n}\\
 		\end{array}
 		\right]
-$$
+```
+
 
 then 
 
-$$
+```math
 \mathbf{v_{0}} \mathbf{M} = \mathbf{v_{n}} 
 	\quad \text{o} \quad
 	\left[ \begin{array}{cc}
@@ -67,14 +68,14 @@ $$
 		y_{n}\\
 		\end{array}
 		\right]
-$$
+```
 
-$$
+```math
 \begin{array}{lll}
-		x_{n} & = & x_{0} \cos \phi - y_{0} \sin \phi\\
-		y_{n} & = & x_{0} \sin \phi + y_{0} \cos \phi\\
-		\end{array}
-$$
+  x_{n} & = & x_{0} \cos \phi - y_{0} \sin \phi \\
+  y_{n} & = & x_{0} \sin \phi + y_{0} \cos \phi \\
+\end{array}
+```
 
 ```math
 \left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)
