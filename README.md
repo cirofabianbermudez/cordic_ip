@@ -19,8 +19,8 @@ In the circular rotation mode a CORDIC fuction could compute the cartisian coord
 
 We start from the idea that we have a vector $\mathbf{v_{0}}$, a rotation matrix $\mathbf{M}$ and that by multiplying them we generate a vector $\mathbf{v_{n}}$.
 
-<p align="center">
-  <img src="images/vector_diagram.png" />
+<p align="center" width="100%">
+  <img width="33%" src="images/vector_diagram.png" />
 </p>
 
 ```math
