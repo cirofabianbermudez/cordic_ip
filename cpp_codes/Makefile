@@ -2,13 +2,17 @@ CXX = g++
 CXXFLAGS = -g -std=c++23 -Wall
 
 #SRCS = $(wildcard *.cpp)
-SRCS1 =  main.cpp
+SRCS1 =  ref_model.cpp
 OBJS1 = $(SRCS1:.cpp=.o)
 
 SRCS2 = fixed_point_converter.cpp
 OBJS2 = $(SRCS2:.cpp=.o)
 
-TARGETS = ref_model converter
+
+SRCS3 = print_table.cpp
+OBJS3 = $(SRCS3:.cpp=.o)
+
+TARGETS = ref_model converter print_table
 
 .PHONY: all ref_model converter run format clean
 
@@ -26,10 +30,16 @@ converter: $(OBJS2)
 	@echo "> Linking object files"
 	$(CXX) $(CXXFLAGS) $(OBJS2) -o $@
 
+
+print_table: $(OBJS3)
+	@echo "> Linking object files"
+	$(CXX) $(CXXFLAGS) $(OBJS3) -o $@
+
 run:
 	@echo "> Running $(TARGET)"
 	./ref_model
 	./converter
+	./print_table
 
 format: $(SRCS)
 	clang-format -i $^ --style=Google
