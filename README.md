@@ -295,7 +295,7 @@ d_{i} \arctan(2^{-i}) =  \arctan(d_{i} 2^{-i})
 ```
 
 
-What happens to $x_{i}  d_{i} 2 ^{-i}$ when $i >$ width of $x$?, in other words, lets imagine that $x$ is 4 bits wide, after the 4 iteration the term $x_{i} d_{i} 2 ^{-i}$ goes to zero, we can think of $2 ^{-i}$ as a shift to the right, and after 4 shifts the is no more to shift, and more iterations do not improve the approximation.
+What happens to $x_{i}  d_{i} 2 ^{-i}$ when $i >$ width of $x_{i}$?, in other words, lets imagine that $x_{i}$ is 4 bits wide, after the 4 iteration the term $x_{i} d_{i} 2 ^{-i}$ goes to zero, we can think of $2 ^{-i}$ as a shift to the right, and after 4 shifts the is no more to shift, and more iterations do not improve the approximation.
 
 Therefore after $n$ iterations the CORDIC equation results in:
 
@@ -307,8 +307,27 @@ Therefore after $n$ iterations the CORDIC equation results in:
 \end{array}
 ```
 
+If we want the rotation to be performed correctly, both magnitude and phase, it is necessary to multiply at the end by $K_{n}$ so that the term $A_{n}$ cancels out.
 
+## Compute sine and cosine using CORDIC
 
+If $y_{0} = 0$ then:
+
+```math
+\begin{array}{lll}
+  x_{n} & \approx & A_{n}( x_{0}  \cos {Z_{0}} )\\
+  y_{n} & \approx & A_{n}( x_{0}  \sin {Z_{0}} )
+\end{array}
+```
+
+and if $x_{0} = \frac{1}{A_{n}} = K_{n}$ then the rotation will produce the sine and cosine of the rotated angle as:
+
+```math
+\begin{array}{lll}
+  x_{n} & \approx & \cos {Z_{0}} \\
+  y_{n} & \approx & \sin {Z_{0}}
+\end{array}
+```
 
 ## References
 
