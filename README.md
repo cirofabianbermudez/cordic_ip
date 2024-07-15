@@ -329,6 +329,9 @@ and if $x_{0} = \frac{1}{A_{n}} = K_{n}$ then the rotation will produce the sine
 \end{array}
 ```
 
+
+## Fixed point analysis
+
 ## References
 
 - [1] CORDIC design in Verilog to produce sine and cosine functions, (Nov. 12, 2013). Accessed: Jul. 07, 2024. [Online Video]. Available: <https://www.youtube.com/watch?v=pTgmySlijAs>
