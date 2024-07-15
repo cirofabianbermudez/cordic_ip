@@ -1,5 +1,6 @@
 # Directories
 vivado/
+cpp/build
 
 # Prerequisites
 *.d
